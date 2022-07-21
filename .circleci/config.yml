@@ -7,9 +7,15 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/install-packages
+      - node/install:
+          install-npm: false
+          node-version: 14.19.3
+      - node/install-yarn:
+          version: 1.22.19
+      -run: 
+          command: yarn
       - run:
-          command: npm run test:e2e
+          command: yarn test:e2e
 workflows:
   build-and-test:
     jobs:
