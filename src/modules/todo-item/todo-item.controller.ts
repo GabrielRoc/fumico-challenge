@@ -1,8 +1,8 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   Param,
   Patch,
@@ -32,12 +32,12 @@ export class TodoItemController {
     @Body(new JoiPipe({ group: 'CREATE' }))
     createTodoItemDto: CreateTodoItemDto,
   ) {
-    if (!user) throw new BadRequestException('User not found');
+    if (!user) throw new ForbiddenException('User not logged in');
 
     return await this.todoItemService.create(createTodoItemDto, user);
   }
 
-  @Get('get')
+  @Get('list')
   async findAll(
     @AuthUser() user: User,
     @Pagination() paginationParams: PaginationParams,

@@ -17,7 +17,7 @@ export class AuthController {
   private readonly service: AuthService;
 
   @Post('register')
-  private register(
+  async register(
     @Body(new JoiPipe({ group: 'REGISTER' })) userDto: UserDto,
   ): Promise<User | never> {
     return this.service.register(userDto);
@@ -25,7 +25,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  private login(
+  async login(
     @Body(new JoiPipe({ group: 'LOGIN' })) userDto: UserDto,
   ): Promise<string | never> {
     return this.service.login(userDto);

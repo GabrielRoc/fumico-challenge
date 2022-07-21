@@ -1,4 +1,8 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import {
+  createParamDecorator,
+  ExecutionContext,
+  ForbiddenException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { TokenInterface } from '../interfaces/token.interface';
 
@@ -8,10 +12,11 @@ export function AuthUser() {
   return createParamDecorator(
     async (_data: unknown, context: ExecutionContext) => {
       const request = context.switchToHttp().getRequest();
+      const token = request.headers.authorization.split(' ')[1];
 
-      const decodedToken = jwtService.decode(
-        request.headers.authorization.split(' ')[1],
-      ) as TokenInterface;
+      if (!token) throw new ForbiddenException('User not logged in');
+
+      const decodedToken = jwtService.decode(token) as TokenInterface;
 
       return { id: decodedToken.id };
     },

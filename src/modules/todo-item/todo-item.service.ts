@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationParams } from 'src/common/interfaces/pagination.interface';
 import { Repository } from 'typeorm';
@@ -53,7 +57,8 @@ export class TodoItemService {
       where: { id: id },
       relations: ['createdBy'],
     });
-    if (todoItem.createdBy.id !== user.id) throw new UnauthorizedException();
+    if (!todoItem) throw new NotFoundException();
+    if (todoItem.createdBy.id !== user.id) throw new ForbiddenException();
 
     return todoItem;
   }
@@ -63,7 +68,7 @@ export class TodoItemService {
       where: { id: id },
       relations: ['createdBy'],
     });
-    if (todoItem.createdBy.id !== user.id) throw new UnauthorizedException();
+    if (todoItem.createdBy.id !== user.id) throw new ForbiddenException();
     await this.todoItemsRepository.update(id, updateTodoItemDto);
     todoItem = await this.todoItemsRepository.findOneBy({ id: id });
 
@@ -75,7 +80,7 @@ export class TodoItemService {
       where: { id: id },
       relations: ['createdBy'],
     });
-    if (todoItem.createdBy.id !== user.id) throw new UnauthorizedException();
+    if (todoItem.createdBy.id !== user.id) throw new ForbiddenException();
     await this.todoItemsRepository.softDelete(id);
 
     return todoItem;

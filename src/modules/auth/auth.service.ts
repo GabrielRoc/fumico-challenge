@@ -44,7 +44,7 @@ export class AuthService {
     );
 
     if (!isPasswordValid)
-      new HttpException('Incorret password', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Incorret password', HttpStatus.UNAUTHORIZED);
 
     return this.generateToken(user);
   }
