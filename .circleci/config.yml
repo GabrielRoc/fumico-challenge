@@ -12,7 +12,7 @@ jobs:
           node-version: 14.19.3
       - node/install-yarn:
           version: 1.22.19
-      -run: 
+      - run:
           command: yarn
       - run:
           command: yarn test:e2e
