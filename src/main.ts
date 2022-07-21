@@ -9,7 +9,7 @@ async function bootstrap() {
     origin: process.env.CORS_WHITELIST.split(','),
   });
   await app.listen(process.env.APP_PORT, () =>
-    console.log(`Server started on port: ${process.env.APP_PORT}`),
+    console.log(`Server started on port: ${process.env.PORT}`),
   );
 }
 bootstrap();
