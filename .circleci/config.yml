@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
-  heroku: circleci/heroku@1.2.6
 jobs:
   build-and-test:
     executor:
@@ -13,12 +12,6 @@ jobs:
       - run:
           command: yarn test:e2e
 workflows:
-  build-test-deploy:
+  build-and-test:
     jobs:
       - build-and-test
-      - heroku/deploy-via-git:
-          - requires:
-              - build-and-test
-          - filters:
-            branches:
-              only: main
