@@ -9,7 +9,6 @@ jobs:
       - checkout
       - node/install:
           install-npm: false
-          node-version: 14.19.3
       - node/install-yarn:
           version: 1.22.19
       - run:
