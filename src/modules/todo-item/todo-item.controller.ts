@@ -31,7 +31,7 @@ export class TodoItemController {
     @AuthUser() user: User,
     @Body(new JoiPipe({ group: 'CREATE' }))
     createTodoItemDto: CreateTodoItemDto,
-  ) {
+  ): Promise<TodoItem> {
     if (!user) throw new ForbiddenException('User not logged in');
 
     return await this.todoItemService.create(createTodoItemDto, user);
@@ -41,14 +41,17 @@ export class TodoItemController {
   async findAll(
     @AuthUser() user: User,
     @Pagination() paginationParams: PaginationParams,
-  ) {
+  ): Promise<PaginationResponseDto<TodoItem>> {
     return new PaginationResponseDto<TodoItem>(
       await this.todoItemService.findAll(paginationParams, user),
     );
   }
 
   @Get('get/:id')
-  async findOne(@AuthUser() user: User, @Param('id') id: string) {
+  async findOne(
+    @AuthUser() user: User,
+    @Param('id') id: string,
+  ): Promise<TodoItem> {
     return await this.todoItemService.findOne(id, user);
   }
 
@@ -58,12 +61,15 @@ export class TodoItemController {
     @Param('id') id: string,
     @Body(new JoiPipe({ group: 'UPDATE' }))
     updateTodoItemDto: UpdateTodoItemDto,
-  ) {
+  ): Promise<TodoItem> {
     return await this.todoItemService.update(id, updateTodoItemDto, user);
   }
 
   @Delete('delete/:id')
-  async remove(@AuthUser() user: User, @Param('id') id: string) {
+  async remove(
+    @AuthUser() user: User,
+    @Param('id') id: string,
+  ): Promise<TodoItem> {
     return await this.todoItemService.remove(id, user);
   }
 }

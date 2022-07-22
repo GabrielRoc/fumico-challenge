@@ -4,7 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationParams } from 'src/common/interfaces/pagination.interface';
+import {
+  PaginationParams,
+  PaginationResult,
+} from 'src/common/interfaces/pagination.interface';
 import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { CreateTodoItemDto } from './dto/create-todo-item.dto';
@@ -28,7 +31,10 @@ export class TodoItemService {
     return await this.todoItemsRepository.save(todoItem);
   }
 
-  async findAll(paginationParams: PaginationParams, user: User) {
+  async findAll(
+    paginationParams: PaginationParams,
+    user: User,
+  ): Promise<PaginationResult<TodoItem>> {
     const todoItems = await this.todoItemsRepository.find({
       where: { createdBy: { id: user.id } },
       skip: (paginationParams.page - 1) * paginationParams.limit,
@@ -52,7 +58,7 @@ export class TodoItemService {
     };
   }
 
-  async findOne(id: string, user: User) {
+  async findOne(id: string, user: User): Promise<TodoItem> {
     const todoItem = await this.todoItemsRepository.findOne({
       where: { id: id },
       relations: ['createdBy'],
@@ -63,7 +69,11 @@ export class TodoItemService {
     return todoItem;
   }
 
-  async update(id: string, updateTodoItemDto: UpdateTodoItemDto, user: User) {
+  async update(
+    id: string,
+    updateTodoItemDto: UpdateTodoItemDto,
+    user: User,
+  ): Promise<TodoItem> {
     let todoItem = await this.todoItemsRepository.findOne({
       where: { id: id },
       relations: ['createdBy'],
@@ -75,7 +85,7 @@ export class TodoItemService {
     return todoItem;
   }
 
-  async remove(id: string, user: User) {
+  async remove(id: string, user: User): Promise<TodoItem> {
     const todoItem = await this.todoItemsRepository.findOne({
       where: { id: id },
       relations: ['createdBy'],
