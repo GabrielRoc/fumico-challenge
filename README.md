@@ -21,7 +21,7 @@ Implementação de um back-end para uma lista de tarefas. Descrição completa [
 
 ```bash
 # setting up environment variables file
-$ cp .env.sample .env
+$ cp .env.example .env
 
 # installing dependencies
 $ yarn
