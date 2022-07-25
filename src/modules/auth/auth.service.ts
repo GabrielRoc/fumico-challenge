@@ -28,6 +28,7 @@ export class AuthService {
     if (user)
       throw new HttpException('User already exists', HttpStatus.CONFLICT);
     else user = await this.usersRepository.create(userDto);
+    user.password = undefined;
 
     return this.usersRepository.save(user);
   }
