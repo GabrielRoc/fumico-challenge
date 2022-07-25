@@ -47,7 +47,7 @@ export class TodoItemService {
 
     const meta = {
       itemsPerPage: +paginationParams.limit,
-      totalItems: +todoItems.length,
+      totalItems: +countItems,
       currentPage: +paginationParams.page,
       totalPages: +Math.ceil(countItems / paginationParams.limit),
     };
