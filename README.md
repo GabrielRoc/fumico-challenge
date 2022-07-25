@@ -48,7 +48,7 @@ $ yarn test:e2e
 
 <ul>
   <li><a href="https://app.circleci.com/pipelines/github/GabrielRoc/fumico-challenge">Circle CI</a></li>
-<li><a href="https://app.circleci.com/pipelines/github/GabrielRoc/fumico-challenge" target="_blank">Heroku Deploy</a></li>
-<li><a href="https://documenter.getpostman.com/view/15250208/UzR1Lhyj#4383e4d8-d47f-4b88-a7b2-1a71671c75c7" target="_blank">Postman Docs</a></li>
-<li><a href="https://www.getpostman.com/collections/d662b7afe7ca453e3073" target="_blank">Postman Collection</a></li>
+  <li><a href="https://fumico-challenge.herokuapp.com/" target="_blank">Heroku Deploy</a></li>
+  <li><a href="https://documenter.getpostman.com/view/15250208/UzR1Lhyj#4383e4d8-d47f-4b88-a7b2-1a71671c75c7" target="_blank">Postman Docs</a></li>
+  <li><a href="https://www.getpostman.com/collections/d662b7afe7ca453e3073" target="_blank">Postman Collection</a></li>
 </ul>
