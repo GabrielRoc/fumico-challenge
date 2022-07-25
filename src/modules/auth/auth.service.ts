@@ -28,9 +28,11 @@ export class AuthService {
     if (user)
       throw new HttpException('User already exists', HttpStatus.CONFLICT);
     else user = await this.usersRepository.create(userDto);
+
+    await this.usersRepository.save(user);
     user.password = undefined;
 
-    return this.usersRepository.save(user);
+    return user;
   }
 
   async login(userDto: UserDto): Promise<string | never> {
