@@ -23,7 +23,7 @@
   "dependencies": {
     "@nestjs/common": "^9.0.4",
     "@nestjs/core": "^9.0.4",
-    "@nestjs/jwt": "^9.0.0",
+    "@nestjs/jwt": "^10.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.4",
@@ -35,7 +35,7 @@
     "joi": "^17.6.0",
     "nestjs-joi": "^1.8.0",
     "passport": "^0.6.0",
-    "passport-jwt": "^4.0.0",
+    "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
